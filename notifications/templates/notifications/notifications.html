@@ -1,0 +1,109 @@
+ {%load static%}
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/general.css'%}">
+    <link rel="stylesheet" href="{% static 'styles/notifications.css'%}">
+    <script src="{% static 'scripts/notification.js'%}" defer></script>
+    <title>Pollaway - Notifications</title>
+</head>
+<body>
+    <main id="settings-main">
+        <!-- side bar menu starts -->
+        {%include 'navbar.html' %}
+        <!-- side bar menu ends -->
+
+        <section class="notifications-body">
+            <!-- page info starts-->
+            <section class="page-info-section">
+                <div class="page-info-field">
+                    <h3 class="page-name">Notifications ({{length}})</h3>
+                    <ul>
+                        <li>
+                        {% if user.my_profile%}
+                                <a href="{% url 'profile' user.id %}">
+                                    <img src="{{user.my_profile.image.url}}" alt="profile-image" srcset="">
+                                </a>
+                                <ul class="sub-menu-2">
+                                    <span class="pointer"></span>
+                                    <li><a href="{% url 'logout'%}">Logout</a></li>
+                                    <li><a href="{% url 'profile' user.id %}">View Profile</a></li>
+                                </ul>
+                            {%else%}
+                                <a href="{% url 'profile' user.id %}">
+                                    <img src="{% static 'images/default-image.jpg'%} " alt="profile-image" srcset="">
+                                </a>
+                                <ul class="sub-menu-2">
+                                    <span class="pointer"></span>
+                                    <li><a href="{% url 'logout'%}">Logout</a></li>
+                                    <li><a href="{% url 'create-profile' %}">Create A Profile</a></li>
+                                </ul>
+                            {%endif%}
+                        </li>
+                    </ul>
+                </div> 
+            </section>
+            <!-- page info starts -->
+
+            <section class="notification-inner-body">
+                <!-- unread notifications starts -->
+                <div class="unread-notification-wrapper notification-wrapper ">
+                    <h4>Unread Notifications</h4>
+                    <form action=" {% url 'mark-all-as-read' %} " method="post" class = "general-form">
+                        {%csrf_token%}
+                        <button type="submit">Mark All As Read</button>
+                    </form>
+                    {%for notification in all_notifications reversed%}
+                        {%if notification.read == False%}
+                            <div class="notification unread">
+                                <div class="notification-detail">
+                                    <h4> <span>"{{notification.message}}"</span></h4>
+                                    <h5>{{notification.time|timesince}} ago</h5>
+                                </div>
+                                <form action="{%url 'mark-as-read' notification.id%}" method = "post">
+                                    {%csrf_token%}
+                                    <button type="submit">Mark As Read</button>
+                                </form>
+                                <form action="{%url 'delete-notification' notification.id %}" method="post">
+                                    {%csrf_token%}
+                                    <button type="submit" class="delete-btn">Delete</button>
+                                </form>
+                            </div>
+                        {%endif%}
+                    {%endfor%}
+                </div>
+                <!-- unread notifications ends-->
+
+                <!-- read notifications starts-->
+                <div class="read-notification-wrapper notification-wrapper">
+                    <h4>Read Notifications</h4>
+                    <form action=" {% url 'delete-all-read' %} " method="post" class = "general-form">
+                        {%csrf_token%}
+                        <button type="submit">Delete All Read Notifications</button>
+                    </form>
+                    {%for notification in all_notifications reversed%}
+                        {%if notification.read %}
+                            <div class="notification read">
+                                <div class="notification-detail">
+                                    <h4><span>"{{notification.message}}"</span></h4>
+                                    <h5>{{notification.time|timesince}} ago</h5>
+                                </div>
+                                <form action="{%url 'delete-notification' notification.id %}" method="post">
+                                    {%csrf_token%}
+                                    <button type="submit" class="delete-btn">Delete</button>
+                                </form>
+                            </div>
+                        {%endif%}
+                    {%endfor%}
+                </div>
+                <!-- read notifications ends -->
+                <button id="no-notification-btn">You Have No Notifications</button>
+            </section>
+            
+        </section>
+    </main>
+</body>
+</html>

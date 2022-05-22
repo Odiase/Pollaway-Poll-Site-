@@ -1,0 +1,120 @@
+.page-info-field{
+  background-color: gold;
+}
+.notification-inner-body {
+  width: 100%;
+  background: #f0f0f0;
+  background-color: rgb(240,240,240);
+  height: calc(100vh - 155px);
+  padding: 10px;
+  overflow-y: auto;
+}
+.general-form{
+  width: 80%;
+  margin: 10px auto;
+}
+.general-form button{
+  width: 100%; background-color: black;color: white; padding: 1em 0;border: none;border-radius: 10px;cursor: pointer;
+}
+#no-notification-btn{
+  width: 80%;
+  margin: 10px auto; background-color: black;color: white; padding: 1em 0;border: none;border-radius: 10px;cursor: pointer;
+}
+
+.notification-inner-body .notification-wrapper {
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.notification-inner-body .notification-wrapper > h4 {
+  margin: 15px 0;
+  padding: 8px;
+  background: black;
+  display: inline-block;
+  color: white;
+  border-radius: 8px;
+}
+
+.notification-inner-body .unread-notification-wrapper .notification {
+  background: rgb(140,18,140);
+  color: white;
+}
+
+.notification-inner-body .notification {
+  width: 100%;
+  background: rgba(170, 48, 170, .5);
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.notification-inner-body .notification .notification-detail {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 10px 0;
+}
+
+.notification-inner-body .notification .notification-detail h4 {
+  font-size: 1.2rem;
+}
+
+.notification-inner-body .notification .notification-detail h4 span {
+  font-family: cursive;
+  margin-left: 5px;
+}
+
+.notification-inner-body .notification form {
+  display: inline-block;
+  margin: 10px;
+}
+
+.notification-inner-body .notification form button {
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.notification-inner-body .notification form button:hover {
+  -webkit-transform: rotate(20deg);
+          transform: rotate(20deg);
+}
+
+.notification-inner-body .notification .delete-btn {
+  background: black;
+  color: white;
+}
+
+@media (min-width: 800px) {
+  #settings-main {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  .notifications-body {
+    width: calc(100% - 22%);
+    margin: auto;
+    height: 100vh;
+  }
+  .notification-inner-body{
+    height: calc(100vh - 100px);
+  }
+  .general-form{
+    width:50%;
+    margin: 15px auto;
+  }
+  #no-notification-btn{
+    width: 50%;
+    margin: 10px auto; background-color: black;color: white; padding: 1em 0;border: none;border-radius: 10px;cursor: pointer;
+  }
+}
+/*# sourceMappingURL=notifications.css.map */
