@@ -1,0 +1,43 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/login.css'%}">
+    <link rel="stylesheet" href="{% static 'styles/general.css'%}">
+    <script src="{% static 'scripts/authentication.js'%}" defer></script>
+    <title>Pollaway - Login</title>
+</head>
+<body>
+    <main id="login-main">
+         <div class="login-field-wrapper">
+            <h2>
+                <span class="auth-intro-text text-invisible first">Login</span>
+                <span class="auth-intro-text text-invisible fourth">And</span>
+                <span id="pollaway">Pollaway</span>
+           </h2>
+           
+           <div class="form-container">
+                {% for message in messages%}
+                    <h4 id="error-message"><li> {{message}} </li></h4>
+                {%endfor%}
+            <form action="" method="post">
+                {%csrf_token%}
+                <div class="field">
+                    <label for="username">Username</label>
+                    <input type="text" placeholder="Enter Your Username" name = "username">
+                </div>
+                <div class="field">
+                    <label for="password">Password</label>
+                    <input type="password" placeholder="Enter Your Password" name = "password">
+                </div>
+                <button type="submit">Login</button>
+            </form>
+           </div>
+           <h3>Dont Have An Account? <a href="{% url 'sign-up'%}">Sign Up</a></h3>
+         </div>
+    </main>
+</body>
+</html>

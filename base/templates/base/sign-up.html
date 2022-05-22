@@ -1,0 +1,54 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/sign-up.css'%}">
+    <link rel="stylesheet" href="{% static 'styles/general.css'%}">
+    <script src="{% static 'scripts/authentication.js'%}" defer></script>
+    <title>Pollaway - Sign Up ( Create An Account With Us Today)</title>
+</head>
+<body>
+    <main id="sign-up-main">
+         <div class="sign-up-field-wrapper">
+            <h2>
+                <span class="auth-intro-text text-invisible first">Sign</span>
+                <span class="auth-intro-text text-invisible second">Up</span>
+                <span class="auth-intro-text text-invisible third">Now,</span>
+                <span class="auth-intro-text text-invisible fourth">And</span>
+                <span id="pollaway">Pollaway</span>
+           </h2>
+           
+           <div class="form-container">
+               {%for message in messages%}
+                    <h4 id="error-message"><li>{{message}}</li></h4>
+                {%endfor%}
+            <form action="" method="post">
+                {%csrf_token%}
+                <div class="field">
+                    <label for="username">Username</label>
+                    <input type="text" placeholder="Enter A Username" name = "username">
+                </div>
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input type="email" placeholder="Enter An Email" name = "email">
+                </div>
+                <div class="field">
+                    <label for="password1">Password</label>
+                    <input type="password" placeholder="Enter A Password" name = "password1">
+                </div>
+                <div class="field">
+                    <label for="password2">Re-enter Password</label>
+                    <input type="password" placeholder="Pls Re enter Your Password" name = "password2">
+                </div>
+                <button type="submit">Create Account</button>
+            </form>
+            <h3>Already Have An Account? <a href="{% url 'login' %}">Login</a></h3>
+            <p>By Creating An Account With Us,You Are Agreeing To Our <b>Terms And Conditions</b></p>
+           </div>
+         </div>
+    </main>
+</body>
+</html>
