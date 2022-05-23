@@ -1,0 +1,156 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  font-size: 80%;
+}
+
+.hide {
+  -webkit-transform: translateY(100px);
+          transform: translateY(100px);
+  opacity: 0;
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+
+.show {
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+  opacity: 1;
+}
+
+#create-poll-main {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: black;
+  color: white;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+h1,
+h2,
+h3 {
+  color: #780a78;
+}
+
+.create-poll-intro-section {
+  width: 80%;
+  margin: 30px auto;
+}
+
+.create-poll-intro-section h1 {
+  margin-bottom: 12px;
+}
+
+.create-poll-section {
+  width: 80%;
+  margin: 20px auto;
+  background-color: #1e1e1e;
+  padding: 1.5em 2em;
+  border-radius: 5px;
+}
+
+.create-poll-section h2 {
+  color: white;
+  margin: 20px 0;
+}
+
+.create-poll-section .message-container {
+  width: 90%;
+  margin: 10px auto;
+  padding: 8px;
+  -webkit-animation: display_error 3s;
+          animation: display_error 3s;
+}
+
+.create-poll-section .message-container li {
+  color: #dd0d0d;
+  font-weight: bolder;
+}
+
+input {
+  margin: 13px 5px;
+}
+
+input[type=text] {
+  background-color: #3c3c3c;
+  color: white;
+  border: none;
+  width: 80%;
+  padding: 5px;
+}
+
+select, input[type=file] {
+  background-color: #3c3c3c;
+  margin: 15px 5px;
+  color: white;
+}
+
+.options-container {
+  margin: 20px 0;
+}
+
+.options-container .options-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#add-option-btn {
+  cursor: pointer;
+}
+
+#remove-option-btn {
+  cursor: pointer;
+}
+
+button {
+  padding: 1em 1.65em;
+  border: none;
+  background-color: #780a78;
+  color: white;
+  font-weight: bolder;
+  cursor: pointer;
+  -webkit-transition: .2s linear;
+  transition: .2s linear;
+  border-radius: 8px;
+}
+
+button:hover {
+  background-color: #961496;
+}
+
+@-webkit-keyframes display_error {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: none;
+  }
+}
+
+@keyframes display_error {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: none;
+  }
+}
+/*# sourceMappingURL=create-poll.css.map */

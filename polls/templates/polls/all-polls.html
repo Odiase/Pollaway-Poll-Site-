@@ -1,0 +1,362 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/general.css'%}">
+    <link rel="stylesheet" href="{% static 'styles/all-polls.css'%}">
+    <!-- custom scripts -->
+    <script src="{% static 'scripts/polls.js'%}" defer></script>
+    <title>Pollaway - Polls</title>
+</head>
+<body>
+    <div class="poll-message">
+        {%for message in messages%}
+        <h4>{{message}}</h4>
+        {%endfor%}
+    </div>
+    <main class="all-polls-main">
+        <!-- navbar starts -->
+        {%include 'navbar.html' %}
+        <!-- navbar ends -->
+
+        <!-- main poll -->
+       <section class="all-poll-section entire-body">
+        <div class="page-info-field">
+            <form action="?" method = "post">
+                {%csrf_token%}
+                <input type="search" name="search-input" id="" placeholder="Search for polls by 'users' and 'titles'">
+                <button type="submit">Search <i class="fa-solid fa-square-poll-vertical"></i> <i class="fa-solid fa-square-poll-vertical"></i></button>
+            </form>
+
+             <ul>
+                 <li>
+                    {% if user.my_profile%}
+                    <a href="{% url 'profile' user.id %}">
+                        <img src="{{user.my_profile.image.url}}" alt="profile-image" srcset="">
+                    </a>
+                    <ul class="sub-menu-2">
+                        <span class="pointer"></span>
+                        <li><a href="{% url 'logout'%}">Logout</a></li>
+                        <li><a href="{% url 'profile' user.id %}">View Profile</a></li>
+                    </ul>
+                {%else%}
+                    <a href="{% url 'profile' user.id %}">
+                        <img src="{% static 'images/default-image.jpg'%} " alt="profile-image" srcset="">
+                    </a>
+                    <ul class="sub-menu-2">
+                        <span class="pointer"></span>
+                        <li><a href="{% url 'logout'%}">Logout</a></li>
+                        <li><a href="{% url 'create-profile' %}">Create A Profile</a></li>
+                    </ul>
+                {%endif%}
+                 </li>
+             </ul>
+        </div>
+
+           <section class="poll-filter-section">
+               <p># Filter The Poll you See</p>
+               <div class="filter-field">
+                <a href="{% url 'polls' %}">
+                    <div class="filter">
+                        <img src="{% static 'images/default-image.jpg' %}" alt="">
+                        <div class="filter-category">
+                            <h5>All</h5>
+                        </div>
+                    </div>
+                </a>
+
+                   <a href="?q=anime"> 
+                       <div class="filter">
+                            <img src="{% static 'images/anime-filter.jpg' %}" alt="">
+                            <div class="filter-category">
+                                <h5>Anime</h5>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="?q=beaauty">
+                        <div class="filter">
+                            <img src="{% static 'images/beauty-filter.jpg' %}" alt="">
+                            <div class="filter-category">
+                                <h5>Beauty</h5>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="?q=business & finance">
+                        <div class="filter">
+                            <img src="{% static 'images/business-filter.jpg' %}" alt="">
+                            <div class="filter-category">
+                                <h5>Business</h5>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="?q=education">
+                        <div class="filter">
+                            <img src="{% static 'images/education-filter.jpg' %}" alt="">
+                            <div class="filter-category">
+                                <h5>Education</h5>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="?q=entertainment">
+                        <div class="filter">
+                            <img src="{% static 'images/entertainment-filter.jpg' %}" alt="">
+                            <div class="filter-category">
+                                <h5>Entertainment</h5>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="?q=fashion">
+                        <div class="filter">
+                            <img src="{% static 'images/fashion-filter.jpg' %}" alt="">
+                            <div class="filter-category">
+                                <h5>Fashion</h5>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="?q=food">
+                        <div class="filter">
+                            <img src="{% static 'images/food-filter.jpg' %}" alt="">
+                            <div class="filter-category">
+                                <h5>Food</h5>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="?q=government">
+                        <div class="filter">
+                            <img src="{% static 'images/government-filter.jpg' %}" alt="">
+                            <div class="filter-category">
+                                <h5>Government</h5>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="?q=lifestyle">
+                        <div class="filter">
+                            <img src="{% static 'images/lifestyle-filter.jpg' %}" alt="">
+                            <div class="filter-category">
+                                <h5>Lifestyle</h5>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="?q=movies">
+                        <div class="filter">
+                            <img src="{% static 'images/movie-filter.jpg' %}" alt="">
+                            <div class="filter-category">
+                                <h5>Movies</h5>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="?q=music">
+                        <div class="filter">
+                            <img src="{% static 'images/music-filter.jpg' %}" alt="">
+                            <div class="filter-category">
+                                <h5>Music</h5>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="?q=others">
+                        <div class="filter">
+                            <img src="{% static 'images/default-image.jpg' %}" alt="">
+                            <div class="filter-category">
+                                <h5>Others</h5>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="?q=relationship">
+                        <div class="filter">
+                            <img src="{% static 'images/relationship-filter.jpg' %}" alt="">
+                            <div class="filter-category">
+                                <h5>Relationship</h5>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="?q=religion">
+                        <div class="filter">
+                            <img src="{% static 'images/religion-filter.jpg' %}" alt="">
+                            <div class="filter-category">
+                                <h5>Religion</h5>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="?q=sports">
+                        <div class="filter">
+                            <img src="{% static 'images/sports-filter.jpg' %}" alt="">
+                            <div class="filter-category">
+                                <h5>Sports</h5>
+                            </div>
+                        </div>
+                    </a>
+
+
+                    <a href="?q=technology">
+                        <div class="filter">
+                            <img src="{% static 'images/technology-filter.jpg' %}" alt="">
+                            <div class="filter-category">
+                                <h5>Technology</h5>
+                            </div>
+                        </div>
+                    </a>
+               </div>
+           </section>
+
+           <!-- all polls -->
+           <section class="polls">
+               <!---------------------- Following Polls -------------------------- -->
+               {%for poll in following_polls reversed %}
+               <div class="poll">
+                   <span class="poll-category">{{poll.category}}</span>
+                   <p>{{poll.date_created|timesince}} ago</p>
+                   {% if poll.image1%}
+                       <div class="poll-image">
+                           <img src="{{poll.image1.url}}" alt="" srcset="">
+                       </div>
+                   {%endif%}
+                   {% if poll.image2%}
+                       <div class="poll-image">
+                           <img src="{{poll.image2.url}}" alt="" srcset="">
+                       </div>
+                   {%endif%}
+                   <h1>{{poll.title}}</h1>
+                   <span class="poll-user">
+                       <a href=" {% url 'profile' poll.user.id %} ">
+                           {%if poll.user.my_profile%}
+                               <img src="{{poll.user.my_profile.image.url}}" alt="" srcset="">
+                           {%endif%}
+                       </a>
+                       <p><b>@{{poll.user.username}}</b></p>
+                   </span>
+                   <div class="poll-options">
+                       
+                       <form action=" {% url 'vote' %} " method="post">
+                           {%csrf_token%}
+                           <input type="hidden" name="poll-id" value = "{{poll.id}}">
+                           {%if poll.multiple_option_selection == False%}
+                               {%for option in poll.option.all%}
+                               <div class="option">
+                                   <input type="radio" name="option" id="" value="{{option.id}}">
+                                   <input type="hidden" name="option_vote_percentage" value = "{{option.vote_percent}}">
+                                   <div class="option-rating">
+                                       <h5>{{option.option}}</h5>
+                                       <div></div>
+                                   </div>
+                                   <h5>{{option.vote_percent}}%</h5>
+                               </div>  
+                               {%endfor%}
+                               <!-- script to show the vote percentage on each poll -->
+                               <script src=" {% static 'scripts/votes.js' %} "></script>
+                           {%else%}
+                               {%for option in poll.option.all%}
+                                   <div class="option">
+                                       <input type="checkbox" name="option" id="" value="{{option.id}}">
+                                       <input type="hidden" name="option_vote_percentage" value = "{{option.vote_percent}}">
+                                       <div class="option-rating">
+                                           <h5>{{option.option}}</h5>
+                                           <div></div>
+                                       </div>
+                                       <h5>{{option.vote_percent}}%</h5>
+                                   </div>  
+                               {%endfor%}
+                               <!-- script to show the vote percentage on each poll -->
+                               <script src=" {% static 'scripts/votes.js' %} "></script>
+                           {%endif%}
+                           <input type="submit" value="Vote">
+                           <p class="details-link"><a href=" {% url 'single-poll' poll.id %} ">See More</a></p>
+                       
+                       </form>
+                   </div>
+               </div>
+           {%endfor%}
+
+
+
+
+                <!------------------ other polls ------------------->
+               {% if lop > 0 or lofp > 0%}
+                    {%for poll in polls reversed %}
+                        <div class="poll">
+                            <span class="poll-category">{{poll.category}}</span>
+                            <p>{{poll.date_created|timesince}} ago</p>
+                            {% if poll.image1%}
+                                <div class="poll-image">
+                                    <img src="{{poll.image1.url}}" alt="" srcset="">
+                                </div>
+                            {%endif%}
+                            {% if poll.image2%}
+                                <div class="poll-image">
+                                    <img src="{{poll.image2.url}}" alt="" srcset="">
+                                </div>
+                            {%endif%}
+                            <h1>{{poll.title}}</h1>
+                            <span class="poll-user">
+                                <a href=" {% url 'profile' poll.user.id %} ">
+                                    {%if poll.user.my_profile%}
+                                        <img src="{{poll.user.my_profile.image.url}}" alt="" srcset="">
+                                    {%endif%}
+                                </a>
+                                <p><b>@{{poll.user.username}}</b></p>
+                            </span>
+                            <div class="poll-options">
+                                
+                                <form action=" {% url 'vote' %} " method="post">
+                                    {%csrf_token%}
+                                    <input type="hidden" name="poll-id" value = "{{poll.id}}">
+                                    {%if poll.multiple_option_selection == False%}
+                                        {%for option in poll.option.all%}
+                                        <div class="option">
+                                            <input type="radio" name="option" id="" value="{{option.id}}">
+                                            <input type="hidden" name="option_vote_percentage" value = "{{option.vote_percent}}">
+                                            <div class="option-rating">
+                                                <h5>{{option.option}}</h5>
+                                                <div></div>
+                                            </div>
+                                            <h5>{{option.vote_percent}}%</h5>
+                                        </div>  
+                                        {%endfor%}
+                                        <!-- script to show the vote percentage on each poll -->
+                                        <script src=" {% static 'scripts/votes.js' %} "></script>
+                                    {%else%}
+                                        {%for option in poll.option.all%}
+                                            <div class="option">
+                                                <input type="checkbox" name="option" id="" value="{{option.id}}">
+                                                <input type="hidden" name="option_vote_percentage" value = "{{option.vote_percent}}">
+                                                <div class="option-rating">
+                                                    <h5>{{option.option}}</h5>
+                                                    <div></div>
+                                                </div>
+                                                <h5>{{option.vote_percent}}%</h5>
+                                            </div>  
+                                        {%endfor%}
+                                        <!-- script to show the vote percentage on each poll -->
+                                        <script src=" {% static 'scripts/votes.js' %} "></script>
+                                    {%endif%}
+                                    <input type="submit" value="Vote">
+                                    <p class="details-link"><a href=" {% url 'single-poll' poll.id %} ">See More</a></p>
+                                
+                                </form>
+                            </div>
+                        </div>
+                    {%endfor%}
+                {%else%}
+                <h1 id="error-msg">Your Search Resulted In "{{lop}}" Polls, <br>Try Something else</h1>
+                {%endif%}
+           </section>
+       </section>
+    </main>
+</body>
+</html>

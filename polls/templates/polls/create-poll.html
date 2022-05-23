@@ -1,0 +1,58 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/create-poll.css' %}">
+    <script src="{% static 'scripts/polls.js' %}" defer></script>
+    <title>Pollaway - Create A Poll :)</title>
+</head>
+<body>
+    <main id="create-poll-main">
+        <!-- poll-form section starts-->
+        <section class="create-poll-section create-poll-intro-section hide">
+            <h2>Create A Poll</h2>
+            <div class="message-container">
+                <ul>
+                    {% for message in messages%}
+                        <li>{{message}}</li>
+                    {%endfor%}
+                </ul>
+            </div>
+            <div class="form-container">
+                <form action="{% url 'create-poll' %}" method = "POST" enctype="multipart/form-data">
+                    {%csrf_token%}
+                    {{form.as_p}}
+                
+                    <div class="options-container">
+                        <div class="options-header">
+                            <h2>Options</h2>
+                            <p id  = "add-option-btn"><b>Add Option +</b></p>
+                            <p id  = "remove-option-btn">Remove Option - </p>
+                        </div>
+                        
+                        <div class="options">
+                            <div class="option">
+                                <label for="option">Option 1:</label>
+                                <input type="text" name="option" id="">
+                            </div>
+
+                            <div class="option">
+                                <label for="option">Option 2:</label>
+                                <input type="text" name="option" id="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit">CREATE</button>
+                </form>
+            </div>
+            <br>
+            
+        </section>
+        <!-- poll-form section ends -->
+    </main>
+</body>
+</html>

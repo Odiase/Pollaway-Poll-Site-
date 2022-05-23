@@ -1,0 +1,108 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="{% static 'styles/general.css'%}">
+    <link rel="stylesheet" href="{% static 'styles/all-polls.css'%}">
+    <link rel="stylesheet" href="{% static 'styles/single-poll.css'%}">
+
+    <title>Pollaway - Poll({{poll.title}})</title>
+</head>
+<body>
+    <header class="single-poll-header">
+        <h3 id="pollaway"><a href=" {% url 'home' %} ">Pollaway</a></h3>
+        <h5><a href=" {% url 'polls' %} ">Polls</a></h5>
+    </header>
+
+
+        <!-- poll info and details -->
+        <main class="single-poll-container">
+            <section>
+                <div class="poll-details">
+                    <span class="poll-category">{{poll.category}}</span>
+                    {%if poll.image1%}
+                        <div class="poll-image">
+                            <img src="{{poll.image1.url}}" alt="" srcset="">
+                        </div>
+                    {%endif%}
+                    {%if poll.image2%}
+                        <div class="poll-image">
+                            <img src="{{poll.image2.url}}" alt="" srcset="">
+                        </div>
+                    {%endif%}
+                    <h1>{{poll.title}}</h1>
+                    <span class="poll-user">
+                        {%if user.my_profile%}
+                            <a href="{% url 'profile' poll.user.id%}"><img src="{{user.my_profile.image.url}}" alt="" srcset=""></a>
+                        {%endif%}
+                        <p><b>@{{user.username}}</b></p>
+                    </span>
+                    <div class="poll-options">
+                        <form action=" {% url 'vote' %} " method="post">
+                            {%csrf_token%}
+                            <input type="hidden" name="poll-id" value = "{{poll.id}}">
+                            {%if poll.multiple_option_selection == False%}
+                            {%for option in poll.option.all%}
+                            <div class="option">
+                                <input type="radio" name="option" id="" value="{{option.id}}">
+                                <input type="hidden" name="option_vote_percentage" value = "{{option.vote_percent}}">
+                                <div class="option-rating">
+                                    <h5>{{option.option}}</h5>
+                                    <div></div>
+                                </div>
+                                <h5>{{option.vote_percent}}%</h5>
+                            </div>
+                            <!-- script to show the vote percentage on each poll -->
+                            <script src=" {% static 'scripts/votes.js' %} "></script>
+                            {%endfor%}
+                        {%else%}
+                            {%for option in poll.option.all%}
+                            <div class="option">
+                                <input type="checkbox" name="option" id="" value="{{option.id}}">
+                                <input type="hidden" name="option_vote_percentage" value = "{{option.vote_percent}}">
+                                <div class="option-rating">
+                                    <h5>{{option.option}}</h5>
+                                    <div></div>
+                                </div>
+                                <h5>{{option.vote_percent}}%</h5>
+                            </div>
+                            <!-- script to show the vote percentage on each poll -->
+                            <script src=" {% static 'scripts/votes.js' %} "></script>
+                            {%endfor%}
+                        {%endif%}
+                        {%if featured == False%}
+                            <input type="submit" value="Vote">
+                        {%endif%}
+                        </form>
+                    </div>
+                </div>
+
+                <div class="poll-info">
+                    <h3>Poll Info</h3>
+                    <div class="infos">
+                        <p>Created By :  <b>{{poll.user.username}}</b></p>
+                        <p>Options :  <b>{{poll_options}}</b></p>
+                        {%if poll.expire%}
+                            {%if poll.is_expired%}
+                                <p><b>This Poll is closed</b></p>
+                            {%else%}
+                                <p>Expires :  <b>{{poll.expire}}</b></p>
+                            {%endif%}
+                        {%endif%} 
+                        <p>Leading Option :  
+                            <b>
+                                {%for option in poll.leading_option%}
+                                   * {{option}},<br>
+                                {%endfor%}
+                            </b>
+                        </p>
+                    </div>
+                    <p id="share-link">Share This Poll <a href="#"><b>Link</b></a></p>
+                </div>
+            </section>
+        </main>
+</body>
+</html>

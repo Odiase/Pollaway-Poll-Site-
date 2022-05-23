@@ -1,0 +1,256 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/general.css'%}">
+    <link rel="stylesheet" href="{% static 'styles/all-polls.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/my-polls.css' %}">
+    <script src="{% static 'scripts/polls.js'%}" defer></script>
+    <title>Pollaway - My Polls</title>
+</head>
+<body>
+    <main class="my-polls-main">
+        <!-- navbar starts -->
+        {% include 'navbar.html' %}
+        <!-- navbar ends -->
+
+        
+        <!-- the main page -->
+        <div class="my-polls-main-section-2 ">
+            <!-- page and user info -->
+            <section class="my-poll-section">
+                <div class="page-info-field">
+                    <h3 class="page-name">My Polls</h3>
+
+                    <ul>
+                        <li>
+                            {% if user.my_profile%}
+                                <a href="{% url 'profile' user.id %}">
+                                    <img src="{{user.my_profile.image.url}}" alt="profile-image" srcset="">
+                                </a>
+                                <ul class="sub-menu-2">
+                                    <span class="pointer"></span>
+                                    <li><a href="{% url 'logout'%}">Logout</a></li>
+                                    <li><a href="{% url 'profile' user.id %}">View Profile</a></li>
+                                </ul>
+                            {%else%}
+                                <a href="{% url 'profile' user.id %}">
+                                    <img src="{% static 'images/default-image.jpg'%} " alt="profile-image" srcset="">
+                                </a>
+                                <ul class="sub-menu-2">
+                                    <span class="pointer"></span>
+                                    <li><a href="{% url 'logout'%}">Logout</a></li>
+                                    <li><a href="{% url 'create-profile' %}">Create A Profile</a></li>
+                                </ul>
+                            {%endif%}
+                        </li>
+                    </ul>
+                </div> 
+            </section>
+
+            <!-- polls section -->
+            
+            <!-- my polls section -->
+            <section class="all-my-polls-section poll-sections">
+                <div class="polls-selection-field">
+                    <h4 class="selected-option" id="personal-poll-btn">Personal Polls <span></span></h4>
+                    <h4 class="not-selected-option" id="other-poll-btn">Other Polls <span></span></h4>
+                </div>
+                <!-- my personal polls start -->
+                <div class="personal-polls-container">
+                    {%if loup > 0%}
+                        {%for poll in personal_polls reversed%}
+                            {%if poll.is_expired%}
+                                <div class="poll closed-poll">
+                                    <div class="closed-poll-layer"></div>
+                                    <span class="poll-category">{{poll.category}}</span>
+                                    <span class="poll-status expired">Expired</span>
+                                    <p>{{poll.date_created|timesince}} ago</p>
+                                    {%if poll.image1%}
+                                        <div class="poll-image">
+                                            <img src="{{poll.image1.url}}" alt="">
+                                        </div>
+                                    {%endif%}
+                                    {%if poll.image2%}
+                                        <div class="poll-image">
+                                            <img src="{{poll.image2.url}}" alt="">
+                                        </div>
+                                    {%endif%}
+                                    <h1>{{poll.title}}</h1>
+                                    <span class="poll-user">
+                                    <a href=" {% url 'profile' poll.user.id %} "> <img src="{{poll.user.my_profile.image.url}}" alt="" srcset=""> </a>
+                                        <p><b>@{{poll.user.username}}</b></p>
+                                    </span>
+                                    
+                                        <div class="poll-options">
+                                            <form action="" method="get">
+                                                {%for option in poll.option.all%}
+                                                    <div class="option">
+                                                        <input type="checkbox" name="option" id="" value="{{option.id}}">
+                                                        <input type="hidden" name="option_vote_percentage" value = "{{option.vote_percent}}">
+                                                        <div class="option-rating">
+                                                            <h5>{{option.option}}</h5>
+                                                            <div></div>
+                                                        </div>
+                                                        <h5>{{option.vote_percent}}%</h5>
+                                                    </div>
+                                                    <!-- script to show the vote percentage on each poll -->
+                                                    <script src=" {% static 'scripts/votes.js' %} "></script>
+                                                {%endfor%}
+                                                <br>
+                                                <p style=" position: absolute; bottom: 30px; left: 10px; z-index: 4;"><a href=" {% url 'delete-poll' poll.id %} " style="color: black; text-decoration: underline;">Delete</a></p>
+                                                <p class="details-link"><a href="">See More</a></p>
+                                            </form>
+                                        </div>
+                                </div>
+                            {%else%}
+                                <div class="poll">
+                                    <span class="poll-category">{{poll.category}}</span>
+                                    <span class="poll-status ongoing">ongoing</span>
+                                    <p>{{poll.date_created|timesince}} ago</p>
+                                    {%if poll.image1%}
+                                        <div class="poll-image">
+                                            <img src="{{poll.image1.url}}" alt="">
+                                        </div>
+                                    {%endif%}
+                                    {%if poll.image2%}
+                                        <div class="poll-image">
+                                            <img src="{{poll.image2.url}}" alt="">
+                                        </div>
+                                    {%endif%}
+                                    <h1>{{poll.title}}</h1>
+                                    <span class="poll-user">
+                                    <a href="{% url 'profile' poll.user.id %}"> <img src="{{poll.user.my_profile.image.url}}" alt="" srcset=""> </a>
+                                        <p><b>@{{poll.user.username}}</b></p>
+                                    </span>
+                                    <div class="poll-options">
+                                        <form action="" method="get">
+                                            {%for option in poll.option.all%}
+                                                <div class="option">
+                                                    <input type="checkbox" name="option" id="" value="{{option.id}}">
+                                                    <input type="hidden" name="option_vote_percentage" value = "{{option.vote_percent}}">
+                                                    <div class="option-rating">
+                                                        <h5>{{option.option}}</h5>
+                                                        <div></div>
+                                                    </div>
+                                                    <h5>{{option.vote_percent}}%</h5>
+                                                </div>
+                                                <!-- script to show the vote percentage on each poll -->
+                                                <script src=" {% static 'scripts/votes.js' %} "></script>
+                                                {%endfor%}
+                                                <br>
+                                                <p style=" position: absolute; bottom: 30px; left: 10px; z-index: 4;"><a href=" {% url 'delete-poll' poll.id %} " style="color: black; text-decoration: underline;">Delete</a></p>
+                                            <p class="details-link"><a href="{% url 'single-poll' poll.id %}">See more</a></p>
+                                        </form>
+                                    </div>
+                                </div>
+                            {%endif%}
+                        {%endfor%}
+                    {%else%}
+                        <h1 style="text-align: center;">You Are Seeing This Message Because You Have No Active Poll or You Haven't Created A Poll, <a href="{% url 'create-poll' %}" style="color:rgb(161, 18, 161)">Create A Poll</a> to see polls here</h1>
+                    {%endif%}
+                </div>
+                <!-- my personal poll ends -->
+
+                <div class="other-polls-container non-active-poll">
+                    {% if lofp > 0 %}
+                        {%for poll in other_polls reversed%}
+                            {%if poll.is_expired%}
+                                <div class="poll closed-poll">
+                                    <div class="closed-poll-layer"></div>
+                                    <span class="poll-category">{{poll.category}}</span>
+                                    <span class="poll-status expired">Expired</span>
+                                    <p>{{poll.date_created|timesince}} ago</p>
+                                    {%if poll.image1%}
+                                        <div class="poll-image">
+                                            <img src="{{poll.image1.url}}" alt="">
+                                        </div>
+                                    {%endif%}
+                                    {%if poll.image2%}
+                                        <div class="poll-image">
+                                            <img src="{{poll.image2.url}}" alt="">
+                                        </div>
+                                    {%endif%}
+                                    <h1>{{poll.title}}</h1>
+                                    <span class="poll-user">
+                                    <a href=" {% url 'profile' poll.user.id %} "> <img src="{{poll.user.my_profile.image.url}}" alt="" srcset=""> </a>
+                                        <p><b>@{{poll.user.username}}</b></p>
+                                    </span>
+                                    
+                                        <div class="poll-options">
+                                            <form action="" method="get">
+                                                {%for option in poll.option.all%}
+                                                    <div class="option">
+                                                        <input type="checkbox" name="option" id="" value="{{option.id}}">
+                                                        <input type="hidden" name="option_vote_percentage" value = "{{option.vote_percent}}">
+                                                        <div class="option-rating">
+                                                            <h5>{{option.option}}</h5>
+                                                            <div></div>
+                                                        </div>
+                                                        <h5>{{option.vote_percent}}%</h5>
+                                                    </div>
+                                                    <!-- script to show the vote percentage on each poll -->
+                                                    <script src=" {% static 'scripts/votes.js' %} "></script>
+                                                {%endfor%}
+                                                <br><br>
+                                                <p style="position: absolute; bottom: 30px; left: 10px; z-index: 4"><a href=" {% url 'remove-featured-poll' poll.id %} " style="color: black; text-decoration: underline; z-index: 9999;">Remove</a></p>
+                                                <p class="details-link"><a href="">See More</a></p>
+                                            </form>
+                                        </div>
+                                </div>
+                            {%else%}
+                                <div class="poll">
+                                    <span class="poll-category">{{poll.category}}</span>
+                                    <span class="poll-status ongoing">ongoing</span>
+                                    <p>{{poll.date_created|timesince}} ago</p>
+                                    {%if poll.image1%}
+                                        <div class="poll-image">
+                                            <img src="{{poll.image1.url}}" alt="">
+                                        </div>
+                                    {%endif%}
+                                    {%if poll.image2%}
+                                        <div class="poll-image">
+                                            <img src="{{poll.image2.url}}" alt="">
+                                        </div>
+                                    {%endif%}
+                                    <h1>{{poll.title}}</h1>
+                                    <span class="poll-user">
+                                    <a href="{% url 'profile' poll.user.id %}"> <img src="{{poll.user.my_profile.image.url}}" alt="" srcset=""> </a>
+                                        <p>{{poll.user.username}}</p>
+                                    </span>
+                                    <div class="poll-options">
+                                        <form action="" method="get">
+                                            {%for option in poll.option.all%}
+                                                <div class="option">
+                                                    <input type="checkbox" name="option" id="" value="{{option.id}}">
+                                                    <input type="hidden" name="option_vote_percentage" value = "{{option.vote_percent}}">
+                                                    <div class="option-rating">
+                                                        <h5>{{option.option}}</h5>
+                                                        <div></div>
+                                                    </div>
+                                                    <h5>{{option.vote_percent}}%</h5>
+                                                </div>
+                                                <!-- script to show the vote percentage on each poll -->
+                                                <script src=" {% static 'scripts/votes.js' %} "></script>
+                                            {%endfor%}
+                                                <br><br>
+                                                <p style="position: absolute; bottom: 30px; left: 10px; z-index: 4"><a href=" {% url 'remove-featured-poll' poll.id %} " style="color: black; text-decoration: underline; z-index: 9999;">Remove</a></p>
+                                            <p class="details-link"><a href="{% url 'single-poll' poll.id %}">See more</a></p>
+                                        </form>
+                                    </div>
+                                </div>
+                            {%endif%}
+                        {%endfor%}
+                    {%else%}
+                        <h1 style="text-align: center;">You Are Not Involved in Any POll, start <a href="{% url 'polls' %}" style="color:rgb(161, 18, 161)">voting now </a> to see polls here</h1>
+                    {%endif%}
+                </div>
+            </section>
+
+        </div>
+    </main>
+</body>
+</html>
