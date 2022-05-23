@@ -1,0 +1,67 @@
+.page-info-field {
+  border-bottom: 2px solid #969696;
+}
+
+.settings-inner-body {
+  width: 100%;
+  background-color: #f0f0f0;
+  height: calc(100vh - 128px);
+  margin-top: 30px;
+  padding: 1em;
+}
+
+.settings-inner-body .settings-form {
+  display: block;
+  width: 100%;
+  padding: 10px 5px;
+}
+
+.settings-inner-body .settings-form .setting {
+  width: 100%;
+  margin: 25px 0;
+  background-color: rgba(200, 78, 200, 0.2);
+  padding: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.settings-inner-body .settings-form .setting label {
+  font-size: 1.2rem;
+}
+
+.settings-inner-body .settings-form button {
+  border: none;
+  padding: 1.2em 1.6em;
+  background-color: #8c128c;
+  color: white;
+  font-weight: bolder;
+  border-radius: 8px;
+}
+
+.settings-inner-body .settings-form button:hover {
+  background-color: #c84ec8;
+  -webkit-transition: all .2s linear;
+  transition: all .2s linear;
+  cursor: pointer;
+}
+
+@media (min-width: 800px) {
+  #settings-main {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  #settings-body {
+    /* -ms-flex-preferred-size: 80%;
+        flex-basis: 80%; */
+    width: calc(100% - 22%);
+  }
+}
+/*# sourceMappingURL=settings.css.map */

@@ -1,0 +1,79 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/general.css'%}">
+    <link rel="stylesheet" href="{% static 'styles/settings.css'%}">
+    <title>Pollaway - Settings</title>
+</head>
+<body>
+    <!-- main section starts -->
+    <main id="settings-main">
+        <!-- side bar menu starts -->
+        {%include 'navbar.html'%}
+        <!-- side bar menu ends -->
+        
+        <!-- main settngs body starts -->
+        <section id="settings-body">
+            <!-- page info -->
+            <section class="page-info-section">
+                <div class="page-info-field">
+                    <h3 class="page-name">Settings</h3>
+                    <ul>
+                        <li>
+                            {% if user.my_profile%}
+                                <a href="{% url 'profile' user.id %}">
+                                    <img src="{{user.my_profile.image.url}}" alt="profile-image" srcset="">
+                                </a>
+                                <ul class="sub-menu-2">
+                                    <span class="pointer"></span>
+                                    <li><a href="{% url 'logout'%}">Logout</a></li>
+                                    <li><a href="{% url 'profile' user.id %}">View Profile</a></li>
+                                </ul>
+                            {%else%}
+                                <a href="{% url 'profile' user.id %}">
+                                    <img src="{% static 'images/default-image.jpg'%} " alt="profile-image" srcset="">
+                                </a>
+                                <ul class="sub-menu-2">
+                                    <span class="pointer"></span>
+                                    <li><a href="{% url 'logout'%}">Logout</a></li>
+                                    <li><a href="{% url 'create-profile' %}">Create A Profile</a></li>
+                                </ul>
+                            {%endif%}
+                        </li>
+                    </ul>
+                </div> 
+            </section>
+            <!-- page info ends -->
+
+            <div class="settings-inner-body">
+                <form action="" class="settings-form" method="post">
+                    {%csrf_token%}
+                    <div class="setting">
+                        <label for="">Hide Profile (Be Anonymous)</label>
+                        {{form.hide_profile}}
+                    </div>
+                    <div class="setting">
+                        <label for="">Allow Email Notifications</label>
+                        {{form.turn_on_email_notifications}}
+                    </div>
+                    <div class="setting">
+                        <label for="">Allow Followers</label>
+                        {{form.allow_followers}}
+                    </div>
+                    <div class="setting">
+                        <label for="">Hide My Subscribers List From Other Users</label>
+                        {{form.hide_subscribers}}
+                    </div>
+                    <button type="submit">Save Settings</button>
+                </form>  
+            </div>
+        </section>
+        <!-- main settings body ends -->
+    </main>
+    <!-- main section ends -->
+</body>
+</html>
