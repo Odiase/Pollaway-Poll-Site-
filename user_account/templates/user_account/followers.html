@@ -1,0 +1,37 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/followers.css' %}">
+    <title>Pollaway - My Followers</title>
+</head>
+<body>
+    <main id="followers-main">
+        <header>
+            <button>Followers({{l_o_p}})</button>
+            <button><a href=" {% url 'my-account' %} ">Go Back</a></button>
+        </header>
+        <section class="followers-body">
+            {%if l_o_p > 0%}
+                {% for follower in followers %}
+                    <div class="follower">
+                        <a href=" {% url 'profile' follower.id %} ">
+                            {%if follower.my_profile%}
+                                <img src=" {{follower.my_profile.image.url}} " alt="follower-img">
+                            {%else%}
+                                <img src=" {{follower.image.url}} " alt="follower-img">
+                            {%endif%}
+                            <p><b>{{follower.username}}</b></p>
+                        </a>
+                    </div>
+                {%endfor%}
+            {%else%}
+                <h1 style="text-align: center;">You Have No <span style="color:rgb(161, 18, 161)">Followers</span></h1>
+            {%endif%}
+        </section>
+    </main>
+</body>
+</html>

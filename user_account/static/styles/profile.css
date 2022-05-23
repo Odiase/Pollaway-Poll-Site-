@@ -1,0 +1,179 @@
+body {
+  background: white;
+}
+
+.profile-body {
+  width: 100%;
+  background: #ebebeb;
+}
+
+.profile-body .profile-info {
+  height: 50vh;
+  min-height: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.profile-body .profile-info .profile-img {
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+}
+
+.profile-body .profile-info .profile-img img {
+  width: inherit;
+  height: inherit;
+  border-radius: inherit;
+  -o-object-fit: center;
+     object-fit: center;
+}
+
+.profile-body .profile-info .profile-about-section {
+  text-align: center;
+  margin-top: 30px;
+  width: 80%;
+  margin: 30px auto 0 auto;
+}
+
+.profile-body .profile-info .profile-about-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+.profile-links {
+  width: 97%;
+  margin: 35px auto;
+  padding: 1.5em .8em;
+  background: #c8c8c8;
+}
+
+.profile-links a {
+  color: black;
+  font-weight: bolder;
+  font-size: 1.2rem;
+}
+
+.profile-links .link {
+  width: 100%;
+  padding: 10px 5px;
+  margin: 10px 0;
+  background: white;
+  border-radius: 4px;
+}
+
+.profile-links .link:hover {
+  background: gainsboro;
+}
+
+.profile-adjust-links {
+  width: 70%;
+  margin: auto;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.profile-adjust-links button {
+  padding: 1em 1.5em;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.profile-adjust-links button:first-child {
+  background: black;
+}
+
+.profile-adjust-links button:last-child {
+  background: #820882;
+}
+
+.profile-adjust-links button a {
+  color: wite;
+  font-weight: bold;
+}
+
+.profile-adjust-links button:hover {
+  -webkit-transform: rotate(20deg);
+          transform: rotate(20deg);
+}
+
+.note {
+  width: 90%;
+  margin: 20px auto;
+  background: darkred;
+  padding: 1em;
+  color: white;
+  border-radius: 7px;
+}
+
+.note h4 {
+  font-size: 1.3rem;
+  margin: 8px 0;
+}
+
+.note span {
+  text-transform: uppercase;
+  font-weight: bolder;
+}
+
+.note a {
+  font-weight: bolder;
+  text-decoration: underline;
+  margin-left: 5px;
+}
+
+.note a:hover {
+  text-decoration: none;
+}
+#follow-btn{
+  padding: 1em 1.5em;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: black;
+  color: white;
+  margin: 10px auto;
+}
+
+@media (min-width: 800px) {
+  .profile-main {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .profile-body {
+    -ms-flex-preferred-size: 80%;
+        flex-basis: 80%;
+    width: calc(100% - 22%);
+    height: calc(100vh - 50px);
+    margin: auto;
+    overflow: scroll;
+  }
+  .profile-body .profile-about-section {
+    width: 50%;
+    margin: auto;
+  }
+  .note {
+    text-align: center;
+  }
+}
+/*# sourceMappingURL=profile.css.map */

@@ -1,0 +1,83 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  outline: none;
+}
+
+#followers-main {
+  background-color: #e6e6e6;
+  max-width: 900px;
+  height: 100vh;
+  margin: auto;
+}
+
+#followers-main header {
+  width: 100%;
+  padding: 1em 1.5em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 20px;
+  background-color: white;
+}
+
+#followers-main header a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+#followers-main header button {
+  padding: 15px;
+  font-weight: bolder;
+  border-radius: 8px;
+  border: none;
+}
+
+#followers-main header button:first-child {
+  background-color: #a012a0;
+  border: none;
+  color: white;
+}
+
+#followers-main header button:last-child {
+  background-color: black;
+}
+
+#followers-main .followers-body {
+  padding: 1em 1.5em;
+}
+
+#followers-main .followers-body .follower {
+  width: 100%;
+  padding: 10px;
+  background-color: #f0f0f0;
+  margin: 5px 0;
+}
+
+#followers-main .followers-body .follower a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: black;
+  text-decoration: none;
+}
+
+#followers-main .followers-body .follower img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+/*# sourceMappingURL=followers.css.map */

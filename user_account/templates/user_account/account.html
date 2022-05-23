@@ -1,0 +1,74 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/general.css'%}">
+    <link rel="stylesheet" href="{% static 'styles/account.css'%}">
+    <script src="{% static 'scripts/polling-homepage.js'%}" defer></script>
+    <title>Pollaway - My Account</title>
+</head>
+<body>
+    <main class="account-main">
+        <!-- navbar starts -->
+        {%include 'navbar.html'%}
+        <!-- navbar ends -->
+
+        
+            <!-- page and user info -->
+        <div class="account-main-section-2">
+            <section class="page-info-section">
+                <div class="page-info-field">
+                    <h3 class="page-name">My Account</h3>
+                    <ul>
+                        <li>
+                            {% if user.my_profile%}
+                                <a href="{% url 'profile' user.id %}">
+                                    <img src="{{user.my_profile.image.url}}" alt="profile-image" srcset="">
+                                </a>
+                                <ul class="sub-menu-2">
+                                    <span class="pointer"></span>
+                                    <li><a href="{% url 'logout'%}">Logout</a></li>
+                                    <li><a href="{% url 'profile' user.id %}">View Profile</a></li>
+                                </ul>
+                            {%else%}
+                                <a href="{% url 'profile' user.id %}">
+                                    <img src="{% static 'images/default-image.jpg'%} " alt="profile-image" srcset="">
+                                </a>
+                                <ul class="sub-menu-2">
+                                    <span class="pointer"></span>
+                                    <li><a href="{% url 'logout'%}">Logout</a></li>
+                                    <li><a href="{% url 'create-profile' %}">Create A Profile</a></li>
+                                </ul>
+                            {%endif%}
+                        </li>
+                    </ul>
+                </div> 
+            </section>
+
+            <section class="account-body">
+                <div class="account-body-links">
+                    <div class="account-body-link">
+                        <h4><a href = " {% url 'logout' %} ">Logout</a></h4>
+                    </div>
+                    <div class="account-body-link">
+                        {%if has_a_profile%}
+                            <h4><a href = "{% url 'profile' user.id %}">My Profile</a></h4>
+                        {%else%}
+                            <h4><a href = "{% url 'create-profile' %}">Create A Profile</a></h4>
+                        {%endif%}
+                    </div>
+                    <div class="account-body-link">
+                        <h4><a href = " {% url 'followers' user.id %} ">My Followers ({{n_o_followers}})</a></h4>
+                    </div>
+                    <div class="account-body-link">
+                        <h4><a href = " {% url 'following' user.id %} ">Following ({{n_o_following}})</a></h4>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,124 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/profile.css'%}">
+    <link rel="stylesheet" href="{% static 'styles/general.css'%}">
+    <title>
+        {%if user == profile.user%}
+            My Profile
+        {%else%}
+            {{profile.user.username}} profile
+        {%endif%}
+    </title>
+</head>
+<body>
+    <main class="profile-main">
+        {%include 'navbar.html' %}
+
+        <!-- profile body starts -->
+        <section class="profile-body">
+            <!-- inner profile body starts -->
+            <div class="profile-info">
+                <div class="profile-img">
+                    <img src="{{profile.image.url}}" alt="profile-image">
+                </div>
+                <div class="profile-about-section">
+                    <h3>About Me</h3>
+                    <p>{{profile.about}}</p>
+                    {%if setting.hide_profile%}
+                    <h5 style="color: darkred;margin: 10px;">Note: <li>Your Profile is Hidden To Other Users</li></h5>
+                    {%endif%}
+
+                    <!-- following logic starts -->
+                    {%if user == profile.user%}
+                    {%else%}
+                        {%if setting.allow_followers == False%}
+                        <!--  checks if the cuurent user is a follower of this profile user -->
+                            {%if is_a_follower == False%}
+                                <form action="" method="">
+                                    <Button type="submit" id="follow-btn">Sorry, You Can't Follow {{profile.user.username}} </Button>
+                                </form>
+                            {%else%}
+                                <form action=" {% url 'unfollow' profile.user.id %} " method="post">
+                                    {%csrf_token%}
+                                    <Button type="submit" id="follow-btn">Unfollow {{profile.user.username}} </Button>
+                                </form>
+                            {%endif%}
+                        {%else%}
+                            {%if is_a_follower%}
+                                <form action=" {% url 'unfollow' profile.user.id %} " method="post">
+                                    {%csrf_token%}
+                                    <Button type="submit" id="follow-btn">Unfollow {{profile.user.username}} </Button>
+                                </form>
+                            {%elif is_a_follower == False%}
+                                <form action=" {% url 'follow' profile.user.id %} " method="post">
+                                    {%csrf_token%}
+                                    <Button type="submit" id="follow-btn">Follow {{profile.user.username}} </Button>
+                                </form>
+                            {%endif%}
+                        {%endif%}
+                    {%endif%}
+                    <!-- following logic ends -->
+
+                </div>
+            </div>
+            <!-- inner profile body ends -->
+
+            <!-- profile links section starts-->
+            <section class="profile-links">
+                {%if user == profile.user%}
+                <div class="link">
+                    <p><a href=" {% url 'my-polls'%} ">See All Polls ({{polls}})</a></p>
+                </div>
+                {%endif%}
+                <div class="link">
+                    <p><a href="">Achievements (2)</a></p>
+                </div>
+                
+                {%if setting.hide_subscribers%}
+                    {%if user == profile.user%}
+                        <div class="link">
+                            <p><a href=" {% url 'followers' profile.user.id %} ">Followers ({{no_of_followers}})</a></p>
+                            <h5 style="color: darkred;margin: 10px;">Note: <li>Your Followers Info is Hidden To Other Users</li></h5>              
+                        </div>
+                    {%else%}
+                    {%endif%}
+                {%else%}
+                    <div class="link">
+                        {%if setting.allow_followers == False%}
+                            {%if user == profile.user%}
+                                <p><a href=" {% url 'followers' profile.user.id %} ">Followers ({{no_of_followers}})</a></p>
+                                <h5 style="color: darkred;margin: 10px;">Note: <li>You Have Turned Off Users From Folowing You</li></h5>
+                            {%else%}
+                                <p><a href=" {% url 'followers' profile.user.id %} ">Followers ({{no_of_followers}})</a></p> 
+                            {%endif%}
+                        {%else%}
+                            <p><a href=" {% url 'followers' profile.user.id %} ">Followers ({{no_of_followers}})</a></p>
+                        {%endif%}
+                    </div>
+                {%endif%}
+            </section>
+            <!-- profile links section ends -->
+            
+            <!-- profile adjust starts -->
+            <div class="profile-adjust-links">
+                <button><a href="{% url 'update-profile' %} ">Update</a></button>
+                <button><a href="{% url 'delete-profile'%} ">Delete</a></button>
+            </div>
+            <!-- profile adjust ends -->
+
+            <!-- note section starts-->
+            <div class="note">
+                <h4>Note</h4>
+                <p>If You Want To Hide your profile from others, i.e <span>(be anonymous)</span> to other users, Kindly go to the <a href="{% url 'settings'%}">Settings Page</a></p>
+            </div>
+            <!-- note section ends -->
+        </section>
+        <!-- profile body ends -->
+    </main>
+</body>
+</html>

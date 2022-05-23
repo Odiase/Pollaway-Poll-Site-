@@ -1,0 +1,60 @@
+.page-info-field {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1em;
+  border-bottom: 2px solid #969696;
+}
+
+.account-body {
+  margin-top: 30px;
+  width: 100%;
+  padding: 10px;
+  background-color: rgb(235,235,235);
+  height: calc(100vh - 180px);
+}
+
+.account-body .account-body-links {
+  width: 100%;
+  margin: auto;
+  padding: 2em .5em;
+}
+
+.account-body .account-body-links .account-body-link {
+  width: 98%;
+  padding: 10px;
+  background-color: white;
+  margin: 30px 0;
+}
+
+.account-body .account-body-links .account-body-link h4 {
+  font-size: 1.3rem;
+}
+
+.account-body .account-body-links .account-body-link h4 a {
+  color: #8c128c;
+}
+
+.account-body .account-body-links .account-body-link h4 a:hover {
+  color: black;
+}
+
+@media (min-width: 800px) {
+  .account-main {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .account-main .account-main-section-2 {
+    -ms-flex-preferred-size: 80%;
+        flex-basis: 80%;
+  }
+}
+/*# sourceMappingURL=account.css.map */

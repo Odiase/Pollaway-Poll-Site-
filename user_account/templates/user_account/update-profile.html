@@ -1,0 +1,31 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/create-profile.css'%}">
+    <title>Pollaway - Update Your Profile</title>
+</head>
+<body>
+    <section class="create-profile">
+        <div class="intro-text">
+            <h2>Update Profile</h2>
+            <p>Do You Have Something Extra To Add To Your Profile :)</p>
+        </div>
+        <form action="" method="post" enctype="multipart/form-data">
+            {%csrf_token%}
+            <div class="form-input">
+                <label for="image">Image:</label>
+                {{form.image}}
+            </div>
+            <div class="form-input">
+                <label for="about">Describe Yourself In A few Words</label>
+                {{form.about}}
+            </div>
+            <button type="submit">Update Profile</button>
+        </form>
+    </section>
+</body>
+</html>
