@@ -1,0 +1,35 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'styles/general.css'%}">
+    <!-- fone awesome script -->
+    <script src="https://kit.fontawesome.com/9c3d7ef638.js" crossorigin="anonymous" defer></script>
+    <!-- custom script -->
+    <script src="{% static 'scripts/navbar.js'%}" defer></script>
+
+</head>
+<body>
+    <div class="side-bar-menu">
+        <header class="polling-home-header">
+            <nav>
+                <h3><a href=" {% url 'home' %} " style="color: inherit; font-family: inherit;">POLLAWAY</a></h3>
+                <h4 class="menu-btn">MENU</h4>
+                <ul class = "menu">
+                    {% if user.is_authenticated%}
+                        <li style="color: black; font-size: 1.5rem;">Hi, <span style="font-family: Arial, Helvetica, sans-serif; color: rgb(140,0,140);">{{user.username}}</span> </li>
+                    {%endif%}
+                    <li class=""><a href="#"class = "nav-links">Dashboard</a></li>
+                    <li class=""><a href=" {% url 'polls' %} "class = "nav-links">All polls</a> <i class="fa-solid fa-square-poll-vertical"></i></li>
+                    <li class=""><a href=" {% url 'my-polls' %} "class = "nav-links">My Polls</a></li>
+                    <li class=""><a href="{% url 'create-poll' %}"class = "nav-links">Create A Poll</a></li>
+                    <li class=""><a href="{% url 'my-account' %}"class = "nav-links">My Account</a></li>
+                    <li class=""><a href="{%url 'notifications' %}" class = "nav-links" >Notifications</a></li>
+                    <li class=""><a href="{% url 'settings' %}" class = "nav-links">Settings </a><i class="fa-solid fa-screwdriver-wrench"></i></li>
+                    <li class=""><a href="{% url 'logout' %}" class = "nav-links">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+</body>
+</html>
