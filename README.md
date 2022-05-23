@@ -1,0 +1,3 @@
+# Pollaway-Poll-Site-
+this is a polling site created in python using the Django Framework, Html, Css And JavaScript...
+This Project also contains features like followers and following, user customized settings etc
